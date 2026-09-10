@@ -1,0 +1,1132 @@
+<style>
+  #ant-university-network {
+    --ant-app-ink: light-dark(#17201d, #edf4f0);
+    --ant-app-muted: light-dark(#68736e, #a5b0ab);
+    --ant-app-bg: light-dark(#eef3f0, #101512);
+    --ant-app-panel: light-dark(#ffffff, #19211d);
+    --ant-app-panel-soft: light-dark(#f6f9f7, #202923);
+    --ant-app-border: light-dark(#dce5df, #35423b);
+    --ant-app-green: #2f7d5a;
+    --ant-app-green-soft: light-dark(#e5f2eb, #20382d);
+    --ant-person: #3f73c9;
+    --ant-skill: #2f7d5a;
+    --ant-course: #7964c7;
+    --ant-project: #d37835;
+    --ant-research: #328a94;
+    --ant-role: #b95563;
+    color: var(--ant-app-ink);
+    color-scheme: light dark;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--ant-app-bg);
+    border: 1px solid var(--ant-app-border);
+    border-radius: 18px;
+    overflow: hidden;
+    min-height: 786px;
+  }
+
+  #ant-university-network * { box-sizing: border-box; }
+  #ant-university-network button,
+  #ant-university-network input { font: inherit; }
+
+  #ant-university-network .ant-app-header {
+    min-height: 66px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: var(--ant-app-panel);
+    border-bottom: 1px solid var(--ant-app-border);
+  }
+
+  #ant-university-network .ant-app-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 188px;
+  }
+
+  #ant-university-network .ant-app-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: var(--ant-app-green);
+    font-weight: 500;
+  }
+
+  #ant-university-network .ant-app-brand-title { font-size: 15px; font-weight: 500; }
+  #ant-university-network .ant-app-brand-subtitle { color: var(--ant-app-muted); font-size: 11px; margin-top: 1px; }
+
+  #ant-university-network .ant-app-nav { display: flex; gap: 4px; flex: 1; }
+  #ant-university-network .ant-app-nav button {
+    border: 0;
+    border-radius: 9px;
+    padding: 9px 12px;
+    background: transparent;
+    color: var(--ant-app-muted);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  #ant-university-network .ant-app-nav button[aria-current="page"] {
+    color: var(--ant-app-green);
+    background: var(--ant-app-green-soft);
+    font-weight: 500;
+  }
+
+  #ant-university-network .ant-app-status {
+    white-space: nowrap;
+    border-radius: 999px;
+    padding: 6px 9px;
+    color: var(--ant-app-green);
+    background: var(--ant-app-green-soft);
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  #ant-university-network .ant-app-layout {
+    display: grid;
+    grid-template-columns: 218px minmax(410px, 1fr) 276px;
+    min-height: 720px;
+  }
+
+  #ant-university-network .ant-app-sidebar,
+  #ant-university-network .ant-app-inspector {
+    padding: 18px;
+    background: var(--ant-app-panel);
+  }
+
+  #ant-university-network .ant-app-sidebar { border-right: 1px solid var(--ant-app-border); }
+  #ant-university-network .ant-app-inspector { border-left: 1px solid var(--ant-app-border); }
+
+  #ant-university-network .ant-app-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  #ant-university-network .ant-app-search-wrap { position: relative; margin-bottom: 22px; }
+  #ant-university-network .ant-app-search-symbol {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    color: var(--ant-app-muted);
+    pointer-events: none;
+  }
+
+  #ant-university-network .ant-app-search {
+    width: 100%;
+    border: 1px solid var(--ant-app-border);
+    border-radius: 10px;
+    padding: 9px 10px 9px 31px;
+    color: var(--ant-app-ink);
+    background: var(--ant-app-panel-soft);
+    outline: none;
+    font-size: 12px;
+  }
+
+  #ant-university-network .ant-app-search:focus {
+    border-color: var(--ant-app-green);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ant-app-green) 14%, transparent);
+  }
+
+  #ant-university-network .ant-app-filter-list { display: grid; gap: 3px; }
+  #ant-university-network .ant-app-filter {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) auto;
+    gap: 7px;
+    align-items: center;
+    padding: 7px 3px;
+    color: var(--ant-app-ink);
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  #ant-university-network .ant-app-filter input { accent-color: var(--ant-app-green); }
+  #ant-university-network .ant-app-filter-count { color: var(--ant-app-muted); font-size: 11px; }
+  #ant-university-network .ant-app-color-dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  #ant-university-network .ant-app-guide {
+    margin-top: 24px;
+    padding: 12px;
+    border-radius: 11px;
+    background: var(--ant-app-green-soft);
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  #ant-university-network .ant-app-guide strong { display: block; color: var(--ant-app-ink); margin-bottom: 3px; }
+
+  #ant-university-network .ant-app-relationship-control {
+    margin-top: 21px;
+    padding-top: 15px;
+    border-top: 1px solid var(--ant-app-border);
+  }
+
+  #ant-university-network .ant-app-workspace {
+    min-width: 0;
+    background:
+      radial-gradient(circle at 48% 43%, color-mix(in srgb, var(--ant-app-green) 7%, transparent), transparent 40%),
+      var(--ant-app-panel-soft);
+    position: relative;
+  }
+
+  #ant-university-network .ant-app-toolbar {
+    position: absolute;
+    z-index: 5;
+    top: 15px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    pointer-events: none;
+  }
+
+  #ant-university-network .ant-app-work-title { font-size: 14px; font-weight: 500; }
+  #ant-university-network .ant-app-work-meta { color: var(--ant-app-muted); font-size: 11px; margin-top: 2px; }
+
+  #ant-university-network .ant-app-domains {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 5px;
+    max-width: 66%;
+    pointer-events: auto;
+  }
+
+  #ant-university-network .ant-app-domain-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    pointer-events: auto;
+  }
+
+  #ant-university-network .ant-app-domain-select {
+    max-width: 210px;
+    border: 1px solid var(--ant-app-border);
+    border-radius: 9px;
+    padding: 7px 30px 7px 9px;
+    color: var(--ant-app-ink);
+    background: var(--ant-app-panel);
+    font-size: 11px;
+  }
+
+  #ant-university-network .ant-app-domain {
+    border: 1px solid var(--ant-app-border);
+    border-radius: 999px;
+    padding: 6px 8px;
+    color: var(--ant-app-muted);
+    background: var(--ant-app-panel);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  #ant-university-network .ant-app-domain[aria-pressed="true"] {
+    color: #ffffff;
+    background: var(--ant-app-green);
+    border-color: var(--ant-app-green);
+  }
+
+  #ant-university-network .ant-app-graph-stage {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  #ant-university-network .ant-app-graph-stage.is-panning { cursor: grabbing; }
+
+  #ant-university-network .ant-app-graph-world {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: max(100%, 2200px);
+    height: max(100%, 1700px);
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  #ant-university-network .ant-app-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  #ant-university-network .ant-app-edge {
+    stroke: color-mix(in srgb, var(--ant-app-muted) 31%, transparent);
+    stroke-width: 1.15;
+    transition: opacity .2s, stroke .2s, stroke-width .2s;
+  }
+
+  #ant-university-network .ant-app-edge.is-related {
+    stroke: var(--ant-app-green);
+    stroke-width: 2;
+  }
+
+  #ant-university-network .ant-app-edge.is-dimmed { opacity: .09; }
+  #ant-university-network .ant-app-edge.is-hidden { display: none; }
+
+  #ant-university-network .ant-app-edge-label {
+    fill: var(--ant-app-ink);
+    font-size: 11px;
+    font-weight: 500;
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: var(--ant-app-panel-soft);
+    stroke-width: 5px;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  #ant-university-network .ant-app-edge-label.is-hidden { display: none; }
+
+  #ant-university-network .ant-app-node {
+    position: absolute;
+    width: 98px;
+    min-height: 64px;
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    color: var(--ant-app-ink);
+    background: transparent;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    touch-action: none;
+    transition: opacity .2s, scale .2s;
+  }
+
+  #ant-university-network .ant-app-node:hover { scale: 1.05; }
+  #ant-university-network .ant-app-node.is-dragging { cursor: grabbing; scale: 1.06; }
+  #ant-university-network .ant-app-node.is-hidden { display: none; }
+  #ant-university-network .ant-app-node.is-dimmed { opacity: .13; }
+
+  #ant-university-network .ant-app-node-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    box-shadow: 0 0 0 3px var(--ant-app-panel-soft);
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  #ant-university-network .ant-app-node[data-type="skill"] .ant-app-node-mark { width: 42px; height: 42px; background: var(--ant-skill); }
+  #ant-university-network .ant-app-node[data-type="person"] .ant-app-node-mark { background: var(--ant-person); }
+  #ant-university-network .ant-app-node[data-type="course"] .ant-app-node-mark { border-radius: 8px; background: var(--ant-course); }
+  #ant-university-network .ant-app-node[data-type="project"] .ant-app-node-mark { border-radius: 8px; background: var(--ant-project); }
+  #ant-university-network .ant-app-node[data-type="research"] .ant-app-node-mark { border-radius: 8px; background: var(--ant-research); }
+  #ant-university-network .ant-app-node[data-type="role"] .ant-app-node-mark { border-radius: 14px 14px 5px 14px; background: var(--ant-role); }
+
+  #ant-university-network .ant-app-node.is-selected .ant-app-node-mark {
+    box-shadow: 0 0 0 3px var(--ant-app-panel-soft), 0 0 0 5px var(--ant-app-ink);
+  }
+
+  #ant-university-network .ant-app-node-name {
+    max-width: 98px;
+    padding: 1px 3px;
+    border-radius: 4px;
+    color: var(--ant-app-ink);
+    background: color-mix(in srgb, var(--ant-app-panel-soft) 88%, transparent);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  #ant-university-network .ant-app-node-type {
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  #ant-university-network .ant-app-empty {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    color: var(--ant-app-muted);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  #ant-university-network .ant-app-zoom-controls {
+    position: absolute;
+    z-index: 7;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    border: 1px solid var(--ant-app-border);
+    border-radius: 10px;
+    background: var(--ant-app-panel);
+    box-shadow: 0 5px 18px color-mix(in srgb, var(--ant-app-ink) 10%, transparent);
+  }
+
+  #ant-university-network .ant-app-zoom-controls button {
+    min-width: 31px;
+    height: 31px;
+    border: 0;
+    border-radius: 7px;
+    color: var(--ant-app-ink);
+    background: var(--ant-app-panel-soft);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  #ant-university-network .ant-app-zoom-controls button:hover { background: var(--ant-app-green-soft); }
+  #ant-university-network .ant-app-zoom-level {
+    min-width: 42px;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    text-align: center;
+  }
+
+  #ant-university-network .ant-app-zoom-fit { padding: 0 8px; font-size: 11px !important; }
+
+  #ant-university-network .ant-app-detail-type {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 5px 8px;
+    color: var(--ant-app-green);
+    background: var(--ant-app-green-soft);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  #ant-university-network .ant-app-inspector h2 {
+    margin: 12px 0 5px;
+    color: var(--ant-app-ink);
+    font-size: 21px;
+    line-height: 1.16;
+    letter-spacing: -.02em;
+  }
+
+  #ant-university-network .ant-app-detail-summary {
+    margin: 0;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  #ant-university-network .ant-app-detail-section {
+    margin-top: 17px;
+    padding-top: 15px;
+    border-top: 1px solid var(--ant-app-border);
+  }
+
+  #ant-university-network .ant-app-detail-section h3 {
+    margin: 0 0 9px;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  #ant-university-network .ant-app-connections { display: grid; gap: 7px; }
+  #ant-university-network .ant-app-connection {
+    padding: 9px;
+    border: 1px solid var(--ant-app-border);
+    border-radius: 9px;
+    background: var(--ant-app-panel-soft);
+  }
+
+  #ant-university-network .ant-app-connection-name { font-size: 11px; font-weight: 500; }
+  #ant-university-network .ant-app-connection-relation { margin-top: 2px; color: var(--ant-app-muted); font-size: 11px; }
+  #ant-university-network .ant-app-domain-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  #ant-university-network .ant-app-domain-tag {
+    padding: 5px 7px;
+    border: 1px solid var(--ant-app-border);
+    border-radius: 7px;
+    color: var(--ant-app-muted);
+    font-size: 11px;
+  }
+
+  #ant-university-network .ant-app-focus {
+    width: 100%;
+    margin-top: 18px;
+    padding: 9px 11px;
+    border: 0;
+    border-radius: 9px;
+    color: #ffffff;
+    background: var(--ant-app-green);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  @media (max-width: 930px) {
+    #ant-university-network .ant-app-layout { grid-template-columns: 192px minmax(0, 1fr); }
+    #ant-university-network .ant-app-inspector { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--ant-app-border); }
+    #ant-university-network .ant-app-header { flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+    #ant-university-network .ant-app-nav { order: 3; flex-basis: 100%; }
+    #ant-university-network .ant-app-node { width: 84px; }
+    #ant-university-network .ant-app-node-name { max-width: 84px; }
+  }
+
+  @media (max-width: 560px) {
+    #ant-university-network { border-radius: 13px; }
+    #ant-university-network .ant-app-header { min-height: 60px; padding: 11px 13px; gap: 9px; }
+    #ant-university-network .ant-app-brand { flex: 1; min-width: 0; }
+    #ant-university-network .ant-app-nav { display: none; }
+    #ant-university-network .ant-app-layout { display: block; }
+    #ant-university-network .ant-app-sidebar { border-right: 0; border-bottom: 1px solid var(--ant-app-border); padding: 14px; }
+    #ant-university-network .ant-app-filter-list { grid-template-columns: 1fr 1fr; }
+    #ant-university-network .ant-app-guide { display: none; }
+    #ant-university-network .ant-app-search-wrap { margin-bottom: 12px; }
+    #ant-university-network .ant-app-toolbar { position: static; display: block; padding: 13px 13px 0; }
+    #ant-university-network .ant-app-domains { max-width: none; justify-content: flex-start; margin-top: 9px; }
+    #ant-university-network .ant-app-graph-stage { height: 650px; }
+    #ant-university-network .ant-app-graph-world { width: 1800px; height: 1500px; }
+    #ant-university-network .ant-app-node { width: 70px; }
+    #ant-university-network .ant-app-node-name { max-width: 70px; font-size: 11px; }
+    #ant-university-network .ant-app-node-type { display: none; }
+  }
+</style>
+
+<div id="ant-university-network">
+  <header class="ant-app-header">
+    <div class="ant-app-brand">
+      <div class="ant-app-logo" aria-hidden="true">A</div>
+      <div>
+        <div class="ant-app-brand-title">A.N.T.</div>
+        <div class="ant-app-brand-subtitle">Academic Network &amp; Talent Map</div>
+      </div>
+    </div>
+    <nav class="ant-app-nav" aria-label="Main navigation">
+      <button type="button" data-view="explore" aria-current="page">Explore</button>
+      <button type="button" data-view="people">People</button>
+      <button type="button" data-view="academic">Academic work</button>
+      <button type="button" data-view="roles">Job roles</button>
+    </nav>
+    <span class="ant-app-status">Sample university data</span>
+  </header>
+
+  <div class="ant-app-layout">
+    <aside class="ant-app-sidebar" aria-label="Network filters">
+      <label class="ant-app-label" for="ant-app-search">Search the network</label>
+      <div class="ant-app-search-wrap">
+        <span class="ant-app-search-symbol" aria-hidden="true">⌕</span>
+        <input id="ant-app-search" class="ant-app-search" type="search" placeholder="Person, skill, project…" autocomplete="off">
+      </div>
+
+      <span class="ant-app-label">Entity types</span>
+      <div class="ant-app-filter-list">
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="person" checked><span><i class="ant-app-color-dot" style="background:var(--ant-person)"></i>People</span><span class="ant-app-filter-count">23</span></label>
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="skill" checked><span><i class="ant-app-color-dot" style="background:var(--ant-skill)"></i>Skill areas</span><span class="ant-app-filter-count">20</span></label>
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="course" checked><span><i class="ant-app-color-dot" style="background:var(--ant-course)"></i>Courses</span><span class="ant-app-filter-count">8</span></label>
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="project" checked><span><i class="ant-app-color-dot" style="background:var(--ant-project)"></i>Projects</span><span class="ant-app-filter-count">8</span></label>
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="research" checked><span><i class="ant-app-color-dot" style="background:var(--ant-research)"></i>Research</span><span class="ant-app-filter-count">8</span></label>
+        <label class="ant-app-filter"><input type="checkbox" data-entity-filter="role" checked><span><i class="ant-app-color-dot" style="background:var(--ant-role)"></i>Job roles</span><span class="ant-app-filter-count">20</span></label>
+      </div>
+
+      <div class="ant-app-relationship-control">
+        <span class="ant-app-label">Relationships</span>
+        <label class="ant-app-filter"><input id="ant-app-show-relationships" type="checkbox" checked><span>Show relationship names</span></label>
+      </div>
+
+      <div class="ant-app-guide">
+        <strong>Explore across domains</strong>
+        People can connect multiple academic areas, revealing shared expertise and possible collaboration.
+      </div>
+    </aside>
+
+    <main class="ant-app-workspace">
+      <div class="ant-app-toolbar">
+        <div>
+          <div id="ant-app-work-title" class="ant-app-work-title">University talent network</div>
+          <div id="ant-app-work-meta" class="ant-app-work-meta" aria-live="polite">Loading network…</div>
+        </div>
+        <label class="ant-app-domain-picker" for="ant-app-domain-select">
+          <span>Academic area</span>
+          <select id="ant-app-domain-select" class="ant-app-domain-select" aria-label="Academic area"></select>
+        </label>
+      </div>
+
+      <div id="ant-app-graph-stage" class="ant-app-graph-stage">
+        <div id="ant-app-graph-world" class="ant-app-graph-world">
+          <svg id="ant-app-lines" class="ant-app-lines" aria-hidden="true"></svg>
+          <div id="ant-app-nodes"></div>
+        </div>
+        <div id="ant-app-empty" class="ant-app-empty">No matching connections</div>
+        <div class="ant-app-zoom-controls" aria-label="Graph zoom controls">
+          <button id="ant-app-zoom-out" type="button" aria-label="Zoom out">−</button>
+          <span id="ant-app-zoom-level" class="ant-app-zoom-level" aria-live="polite">100%</span>
+          <button id="ant-app-zoom-in" type="button" aria-label="Zoom in">+</button>
+          <button id="ant-app-zoom-fit" class="ant-app-zoom-fit" type="button">Fit</button>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ant-app-inspector" aria-live="polite">
+      <span id="ant-app-detail-type" class="ant-app-detail-type">Skill area</span>
+      <h2 id="ant-app-detail-title">AI &amp; Data</h2>
+      <p id="ant-app-detail-summary" class="ant-app-detail-summary">A shared expertise area connecting people, courses, research, projects, and industry roles.</p>
+
+      <section class="ant-app-detail-section">
+        <h3>Direct connections</h3>
+        <div id="ant-app-connections" class="ant-app-connections"></div>
+      </section>
+
+      <section class="ant-app-detail-section">
+        <h3>Academic areas</h3>
+        <div id="ant-app-detail-domains" class="ant-app-domain-tags"></div>
+      </section>
+
+      <button id="ant-app-focus" class="ant-app-focus" type="button">Focus on this node</button>
+    </aside>
+  </div>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('ant-university-network');
+  const graphStage = root.querySelector('#ant-app-graph-stage');
+  const graphWorld = root.querySelector('#ant-app-graph-world');
+  const linesLayer = root.querySelector('#ant-app-lines');
+  const nodesLayer = root.querySelector('#ant-app-nodes');
+  const search = root.querySelector('#ant-app-search');
+  const domainSelect = root.querySelector('#ant-app-domain-select');
+  const navButtons = [...root.querySelectorAll('.ant-app-nav [data-view]')];
+  const showRelationshipNames = root.querySelector('#ant-app-show-relationships');
+  const workTitle = root.querySelector('#ant-app-work-title');
+  const workMeta = root.querySelector('#ant-app-work-meta');
+  const empty = root.querySelector('#ant-app-empty');
+  const detailType = root.querySelector('#ant-app-detail-type');
+  const detailTitle = root.querySelector('#ant-app-detail-title');
+  const detailSummary = root.querySelector('#ant-app-detail-summary');
+  const connections = root.querySelector('#ant-app-connections');
+  const detailDomains = root.querySelector('#ant-app-detail-domains');
+  const focusButton = root.querySelector('#ant-app-focus');
+  const zoomOutButton = root.querySelector('#ant-app-zoom-out');
+  const zoomInButton = root.querySelector('#ant-app-zoom-in');
+  const zoomFitButton = root.querySelector('#ant-app-zoom-fit');
+  const zoomLevel = root.querySelector('#ant-app-zoom-level');
+
+  const typeNames = { person:'Person', skill:'Skill area', course:'Course', project:'Project', research:'Research', role:'Job role' };
+  const typeMarks = { person:'P', skill:'S', course:'C', project:'Pj', research:'R', role:'J' };
+  const domainNames = {
+    cyber:'Cybersecurity',
+    ai:'AI & Data',
+    robotics:'Robotics',
+    energy:'Energy Systems',
+    ux:'UX & HCI',
+    cloud:'Cloud Computing',
+    software:'Software Engineering',
+    iot:'Internet of Things',
+    biotech:'Biotechnology',
+    materials:'Materials Science',
+    environment:'Environmental Engineering',
+    civil:'Civil & Infrastructure',
+    food:'Food Science',
+    edtech:'Educational Technology',
+    business:'Business & Innovation',
+    logistics:'Logistics & Supply Chain',
+    architecture:'Architecture & Urban Design',
+    media:'Digital Media',
+    health:'Health Data Science',
+    manufacturing:'Smart Manufacturing'
+  };
+
+  const viewConfigs = {
+    explore: {
+      title: 'University talent network',
+      types: ['person','skill','course','project','research','role'],
+      selected: 'narin'
+    },
+    people: {
+      title: 'People and expertise',
+      types: ['person','skill'],
+      selected: 'narin'
+    },
+    academic: {
+      title: 'Academic work and evidence',
+      types: ['skill','course','project','research'],
+      selected: 'visionresearch'
+    },
+    roles: {
+      title: 'Job roles and required skills',
+      types: ['skill','role'],
+      selected: 'securityrole'
+    }
+  };
+
+  const nodeData = [
+    {id:'cyber',label:'Cybersecurity',type:'skill',domains:['cyber'],x:18,y:25,summary:'Expertise in protecting systems, networks, and information from digital threats.'},
+    {id:'ai',label:'AI & Data',type:'skill',domains:['ai'],x:46,y:22,summary:'Expertise in machine learning, data analysis, and intelligent systems.'},
+    {id:'robotics',label:'Robotics',type:'skill',domains:['robotics'],x:76,y:25,summary:'Expertise in sensing, control, autonomous systems, and robot development.'},
+    {id:'energy',label:'Energy Systems',type:'skill',domains:['energy'],x:27,y:72,summary:'Expertise in electrical energy, smart grids, and sustainable energy systems.'},
+    {id:'ux',label:'UX & HCI',type:'skill',domains:['ux'],x:68,y:72,summary:'Expertise in user research, interaction design, and human-computer interaction.'},
+
+    {id:'narin',label:'Narin S.',type:'person',domains:['cyber','ai'],x:31,y:14,summary:'Sample researcher profile connecting cybersecurity with data-driven anomaly detection.'},
+    {id:'maya',label:'Maya P.',type:'person',domains:['cyber'],x:10,y:42,summary:'Sample student profile with project experience in security operations.'},
+    {id:'ken',label:'Ken T.',type:'person',domains:['ai','robotics'],x:61,y:13,summary:'Sample student profile connecting machine learning with autonomous systems.'},
+    {id:'lina',label:'Lina R.',type:'person',domains:['ai','energy'],x:39,y:51,summary:'Sample researcher profile applying forecasting methods to energy systems.'},
+    {id:'ploy',label:'Ploy N.',type:'person',domains:['ux'],x:78,y:87,summary:'Sample student profile with experience in user research and interface design.'},
+    {id:'arun',label:'Arun K.',type:'person',domains:['robotics'],x:89,y:42,summary:'Sample academic profile focused on control systems and robot navigation.'},
+    {id:'fah',label:'Fah C.',type:'person',domains:['energy'],x:11,y:83,summary:'Sample student profile with project work in smart-grid monitoring.'},
+    {id:'beam',label:'Beam J.',type:'person',domains:['ai','ux'],x:59,y:51,summary:'Sample designer-researcher profile working with AI-assisted interfaces.'},
+
+    {id:'netcourse',label:'Network Defense',type:'course',domains:['cyber'],x:5,y:12,summary:'Sample course covering network protection, monitoring, and defensive controls.'},
+    {id:'mlcourse',label:'Machine Learning',type:'course',domains:['ai'],x:43,y:5,summary:'Sample course introducing machine-learning methods and model evaluation.'},
+    {id:'hcicourse',label:'Human–Computer Interaction',type:'course',domains:['ux'],x:55,y:88,summary:'Sample course covering user-centered design and usability evaluation.'},
+
+    {id:'socproject',label:'SOC Dashboard',type:'project',domains:['cyber'],x:24,y:43,summary:'Sample project for monitoring and investigating security events.'},
+    {id:'robotproject',label:'Robot Navigation',type:'project',domains:['robotics'],x:89,y:11,summary:'Sample project using perception and control for autonomous navigation.'},
+    {id:'campusapp',label:'Campus Service App',type:'project',domains:['ux'],x:85,y:64,summary:'Sample student project designed around campus service journeys.'},
+
+    {id:'visionresearch',label:'Computer Vision',type:'research',domains:['ai','robotics'],x:58,y:32,summary:'Sample research connecting visual learning methods with robotic perception.'},
+    {id:'solarresearch',label:'Solar Forecasting',type:'research',domains:['ai','energy'],x:26,y:55,summary:'Sample research applying prediction methods to renewable-energy generation.'},
+    {id:'smartgrid',label:'Smart Grid Monitoring',type:'research',domains:['energy'],x:43,y:87,summary:'Sample research focused on sensing and analysis for electrical grids.'},
+
+    {id:'securityrole',label:'Security Analyst',type:'role',domains:['cyber'],x:6,y:28,summary:'A job role focused on monitoring, investigating, and responding to security events.'},
+    {id:'datascientist',label:'Data Scientist',type:'role',domains:['ai'],x:39,y:36,summary:'A job role using data analysis, statistics, and machine learning to support decisions.'},
+    {id:'robotrole',label:'Robotics Engineer',type:'role',domains:['robotics'],x:92,y:27,summary:'A job role involving the design and implementation of robotic systems.'},
+    {id:'energyrole',label:'Energy Analyst',type:'role',domains:['energy'],x:7,y:66,summary:'A job role analyzing energy use, performance, and system trends.'},
+    {id:'uxrole',label:'UX Researcher',type:'role',domains:['ux'],x:83,y:76,summary:'A job role investigating user needs and evaluating product experiences.'}
+  ];
+
+  nodeData.forEach(node => {
+    node.y = 3 + node.y * 0.25;
+  });
+
+  const expandedAreas = [
+    {key:'cloud',label:'Cloud Computing',x:10,y:41,person:'Ava K.',evidence:'Cloud Infrastructure',evidenceType:'course',role:'Cloud Engineer'},
+    {key:'software',label:'Software Engineering',x:30,y:41,person:'Win P.',evidence:'Software Architecture',evidenceType:'course',role:'Software Engineer'},
+    {key:'iot',label:'Internet of Things',x:50,y:41,person:'Tao N.',evidence:'Smart Sensor Network',evidenceType:'project',role:'IoT Engineer'},
+    {key:'biotech',label:'Biotechnology',x:70,y:41,person:'Mew R.',evidence:'Bioinformatics Study',evidenceType:'research',role:'Bioinformatics Scientist'},
+    {key:'materials',label:'Materials Science',x:90,y:41,person:'Pat L.',evidence:'Advanced Materials',evidenceType:'research',role:'Materials Engineer'},
+    {key:'environment',label:'Environmental Engineering',x:10,y:65,person:'Nida S.',evidence:'Air Quality Monitoring',evidenceType:'research',role:'Environmental Engineer'},
+    {key:'civil',label:'Civil & Infrastructure',x:30,y:65,person:'Oak C.',evidence:'Structural Analysis',evidenceType:'course',role:'Civil Engineer'},
+    {key:'food',label:'Food Science',x:50,y:65,person:'Fern T.',evidence:'Food Safety Lab',evidenceType:'project',role:'Food Technologist'},
+    {key:'edtech',label:'Educational Technology',x:70,y:65,person:'Mint W.',evidence:'Adaptive Learning',evidenceType:'project',role:'Learning Technologist'},
+    {key:'business',label:'Business & Innovation',x:90,y:65,person:'Guy V.',evidence:'Innovation Strategy',evidenceType:'course',role:'Product Manager'},
+    {key:'logistics',label:'Logistics & Supply Chain',x:10,y:89,person:'Jane K.',evidence:'Supply Chain Analytics',evidenceType:'research',role:'Logistics Analyst'},
+    {key:'architecture',label:'Architecture & Urban Design',x:30,y:89,person:'Art P.',evidence:'Sustainable Building',evidenceType:'project',role:'Architect'},
+    {key:'media',label:'Digital Media',x:50,y:89,person:'Film N.',evidence:'Interactive Media',evidenceType:'course',role:'Digital Media Designer'},
+    {key:'health',label:'Health Data Science',x:70,y:89,person:'Nan H.',evidence:'Health Data Analytics',evidenceType:'research',role:'Health Data Analyst'},
+    {key:'manufacturing',label:'Smart Manufacturing',x:90,y:89,person:'Max M.',evidence:'Smart Factory',evidenceType:'project',role:'Manufacturing Engineer'}
+  ];
+
+  expandedAreas.forEach(area => {
+    nodeData.push(
+      {id:area.key,label:area.label,type:'skill',domains:[area.key],x:area.x,y:area.y,summary:`An academic expertise area connecting people, evidence, and careers related to ${area.label}.`},
+      {id:`${area.key}-person`,label:area.person,type:'person',domains:[area.key],x:area.x-5,y:area.y-7,summary:`Sample university profile with academic evidence related to ${area.label}.`},
+      {id:`${area.key}-evidence`,label:area.evidence,type:area.evidenceType,domains:[area.key],x:area.x+6,y:area.y-6,summary:`Sample ${area.evidenceType} providing evidence connected to ${area.label}.`},
+      {id:`${area.key}-role`,label:area.role,type:'role',domains:[area.key],x:area.x+5,y:area.y+7,summary:`A sample industry role requiring knowledge related to ${area.label}.`}
+    );
+  });
+
+  const edgeData = [
+    {a:'narin',b:'cyber',r:'has expertise'}, {a:'narin',b:'ai',r:'has expertise'}, {a:'narin',b:'visionresearch',r:'contributes to'},
+    {a:'maya',b:'cyber',r:'has expertise'}, {a:'maya',b:'socproject',r:'works on'},
+    {a:'ken',b:'ai',r:'has expertise'}, {a:'ken',b:'robotics',r:'has expertise'}, {a:'ken',b:'robotproject',r:'works on'},
+    {a:'lina',b:'ai',r:'has expertise'}, {a:'lina',b:'energy',r:'has expertise'}, {a:'lina',b:'solarresearch',r:'conducts'},
+    {a:'ploy',b:'ux',r:'has expertise'}, {a:'ploy',b:'campusapp',r:'works on'},
+    {a:'arun',b:'robotics',r:'has expertise'}, {a:'arun',b:'robotproject',r:'supervises'},
+    {a:'fah',b:'energy',r:'has expertise'}, {a:'fah',b:'smartgrid',r:'contributes to'},
+    {a:'beam',b:'ai',r:'has expertise'}, {a:'beam',b:'ux',r:'has expertise'}, {a:'beam',b:'hcicourse',r:'completed'},
+    {a:'netcourse',b:'cyber',r:'supports skill'}, {a:'socproject',b:'cyber',r:'demonstrates skill'},
+    {a:'mlcourse',b:'ai',r:'supports skill'}, {a:'visionresearch',b:'ai',r:'relates to skill'}, {a:'visionresearch',b:'robotics',r:'relates to skill'},
+    {a:'robotproject',b:'robotics',r:'demonstrates skill'}, {a:'solarresearch',b:'ai',r:'uses skill'}, {a:'solarresearch',b:'energy',r:'relates to skill'},
+    {a:'smartgrid',b:'energy',r:'relates to skill'}, {a:'hcicourse',b:'ux',r:'supports skill'}, {a:'campusapp',b:'ux',r:'demonstrates skill'},
+    {a:'securityrole',b:'cyber',r:'requires skill'}, {a:'datascientist',b:'ai',r:'requires skill'}, {a:'robotrole',b:'robotics',r:'requires skill'},
+    {a:'energyrole',b:'energy',r:'requires skill'}, {a:'uxrole',b:'ux',r:'requires skill'},
+    {a:'ai',b:'robotics',r:'related expertise'}, {a:'ai',b:'energy',r:'related expertise'}, {a:'ai',b:'ux',r:'related expertise'}
+  ];
+
+  expandedAreas.forEach(area => {
+    const evidenceRelation = area.evidenceType === 'course' ? 'supports skill' : area.evidenceType === 'project' ? 'demonstrates skill' : 'relates to skill';
+    edgeData.push(
+      {a:`${area.key}-person`,b:area.key,r:'has expertise'},
+      {a:`${area.key}-evidence`,b:area.key,r:evidenceRelation},
+      {a:`${area.key}-role`,b:area.key,r:'requires skill'}
+    );
+  });
+
+  [
+    ['cloud','cyber'], ['cloud','software'], ['software','ai'], ['software','ux'],
+    ['iot','robotics'], ['iot','energy'], ['biotech','health'], ['biotech','food'],
+    ['materials','manufacturing'], ['materials','energy'], ['environment','energy'], ['environment','civil'],
+    ['civil','architecture'], ['food','health'], ['edtech','ux'], ['business','logistics'],
+    ['business','software'], ['logistics','ai'], ['architecture','ux'], ['media','ux'],
+    ['media','edtech'], ['health','ai'], ['manufacturing','robotics'], ['manufacturing','iot']
+  ].forEach(([a,b]) => edgeData.push({a,b,r:'related expertise'}));
+
+  const nodeById = new Map(nodeData.map(node => [node.id, node]));
+  domainSelect.innerHTML = `<option value="all">All 20 academic areas</option>${Object.entries(domainNames).map(([key, name]) => `<option value="${key}">${name}</option>`).join('')}`;
+  let selectedId = 'narin';
+  let selectedDomain = 'all';
+  let focused = false;
+  let graphScale = 1;
+  let graphOffsetX = 0;
+  let graphOffsetY = 0;
+  let panPointerId = null;
+  let panStartX = 0;
+  let panStartY = 0;
+  let panOriginX = 0;
+  let panOriginY = 0;
+
+  function applyGraphTransform() {
+    graphWorld.style.transform = `translate(${graphOffsetX}px, ${graphOffsetY}px) scale(${graphScale})`;
+    zoomLevel.textContent = `${Math.round(graphScale * 100)}%`;
+  }
+
+  function zoomGraph(nextScale, centerX, centerY) {
+    const clampedScale = Math.min(2.5, Math.max(0.3, nextScale));
+    const worldX = (centerX - graphOffsetX) / graphScale;
+    const worldY = (centerY - graphOffsetY) / graphScale;
+    graphOffsetX = centerX - worldX * clampedScale;
+    graphOffsetY = centerY - worldY * clampedScale;
+    graphScale = clampedScale;
+    applyGraphTransform();
+  }
+
+  function zoomFromCenter(multiplier) {
+    zoomGraph(
+      graphScale * multiplier,
+      graphStage.clientWidth / 2,
+      graphStage.clientHeight / 2
+    );
+  }
+
+  function fitGraph() {
+    const padding = 24;
+    const availableWidth = Math.max(graphStage.clientWidth - padding * 2, 1);
+    const availableHeight = Math.max(graphStage.clientHeight - padding * 2, 1);
+    graphScale = Math.min(
+      1,
+      availableWidth / Math.max(graphWorld.clientWidth, 1),
+      availableHeight / Math.max(graphWorld.clientHeight, 1)
+    );
+    graphOffsetX = (graphStage.clientWidth - graphWorld.clientWidth * graphScale) / 2;
+    graphOffsetY = (graphStage.clientHeight - graphWorld.clientHeight * graphScale) / 2;
+    applyGraphTransform();
+  }
+
+  function centerNode(id, scale = 1) {
+    const node = nodeById.get(id);
+    if (!node) return;
+    graphScale = Math.min(2.5, Math.max(0.65, scale));
+    graphOffsetX = graphStage.clientWidth / 2 - graphWorld.clientWidth * node.x / 100 * graphScale;
+    graphOffsetY = graphStage.clientHeight / 2 - graphWorld.clientHeight * node.y / 100 * graphScale;
+    applyGraphTransform();
+  }
+
+  function centerDomain(domain) {
+    const members = nodeData.filter(node => node.domains.includes(domain));
+    if (!members.length) return;
+    const centerX = members.reduce((sum, node) => sum + node.x, 0) / members.length;
+    const centerY = members.reduce((sum, node) => sum + node.y, 0) / members.length;
+    graphScale = 1;
+    graphOffsetX = graphStage.clientWidth / 2 - graphWorld.clientWidth * centerX / 100;
+    graphOffsetY = graphStage.clientHeight / 2 - graphWorld.clientHeight * centerY / 100;
+    applyGraphTransform();
+  }
+
+  function refreshEdgePositions() {
+    const lines = root.querySelectorAll('.ant-app-edge');
+    const labels = root.querySelectorAll('.ant-app-edge-label');
+    edgeData.forEach((edge, index) => {
+      const a = nodeById.get(edge.a);
+      const b = nodeById.get(edge.b);
+      const line = lines[index];
+      const label = labels[index];
+      line.setAttribute('x1', `${a.x}%`);
+      line.setAttribute('y1', `${a.y}%`);
+      line.setAttribute('x2', `${b.x}%`);
+      line.setAttribute('y2', `${b.y}%`);
+      label.setAttribute('x', `${(a.x + b.x) / 2}%`);
+      label.setAttribute('y', `${(a.y + b.y) / 2 - 1}%`);
+    });
+  }
+
+  function buildGraph() {
+    const lineMarkup = edgeData.map((edge, index) => {
+      const a = nodeById.get(edge.a);
+      const b = nodeById.get(edge.b);
+      return `<line class="ant-app-edge" data-edge-index="${index}" x1="${a.x}%" y1="${a.y}%" x2="${b.x}%" y2="${b.y}%"></line>`;
+    }).join('');
+
+    const labelMarkup = edgeData.map((edge, index) => {
+      const a = nodeById.get(edge.a);
+      const b = nodeById.get(edge.b);
+      const x = (a.x + b.x) / 2;
+      const y = (a.y + b.y) / 2 - 1;
+      return `<text class="ant-app-edge-label" data-label-index="${index}" x="${x}%" y="${y}%">${edge.r}</text>`;
+    }).join('');
+
+    linesLayer.innerHTML = `<g>${lineMarkup}</g><g>${labelMarkup}</g>`;
+
+    nodesLayer.innerHTML = nodeData.map(node => `
+      <button class="ant-app-node" type="button" data-id="${node.id}" data-type="${node.type}" style="left:${node.x}%;top:${node.y}%" aria-label="${typeNames[node.type]}: ${node.label}">
+        <span class="ant-app-node-mark" aria-hidden="true">${typeMarks[node.type]}</span>
+        <span class="ant-app-node-name">${node.label}</span>
+        <span class="ant-app-node-type">${typeNames[node.type]}</span>
+      </button>`).join('');
+
+    root.querySelectorAll('.ant-app-node').forEach(button => {
+      let dragPointerId = null;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let nodeStartX = 0;
+      let nodeStartY = 0;
+      let moved = false;
+
+      button.addEventListener('click', () => {
+        if (button.dataset.wasDragged === 'true') return;
+        selectNode(button.dataset.id);
+      });
+
+      button.addEventListener('pointerdown', event => {
+        event.stopPropagation();
+        const node = nodeById.get(button.dataset.id);
+        dragPointerId = event.pointerId;
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
+        nodeStartX = node.x;
+        nodeStartY = node.y;
+        moved = false;
+        button.classList.add('is-dragging');
+        button.setPointerCapture(event.pointerId);
+        selectNode(node.id);
+      });
+
+      button.addEventListener('pointermove', event => {
+        if (event.pointerId !== dragPointerId) return;
+        const deltaX = (event.clientX - dragStartX) / graphScale;
+        const deltaY = (event.clientY - dragStartY) / graphScale;
+        if (Math.abs(deltaX) + Math.abs(deltaY) > 3) moved = true;
+        const node = nodeById.get(button.dataset.id);
+        node.x = Math.min(97, Math.max(3, nodeStartX + deltaX / graphWorld.clientWidth * 100));
+        node.y = Math.min(96, Math.max(4, nodeStartY + deltaY / graphWorld.clientHeight * 100));
+        button.style.left = `${node.x}%`;
+        button.style.top = `${node.y}%`;
+        refreshEdgePositions();
+      });
+
+      function stopNodeDrag(event) {
+        if (event.pointerId !== dragPointerId) return;
+        dragPointerId = null;
+        button.classList.remove('is-dragging');
+        if (moved) {
+          button.dataset.wasDragged = 'true';
+          window.setTimeout(() => delete button.dataset.wasDragged, 0);
+        }
+      }
+
+      button.addEventListener('pointerup', stopNodeDrag);
+      button.addEventListener('pointercancel', stopNodeDrag);
+    });
+  }
+
+  function directConnections(id) {
+    return edgeData.filter(edge => edge.a === id || edge.b === id).map(edge => {
+      const otherId = edge.a === id ? edge.b : edge.a;
+      return { node: nodeById.get(otherId), relation: edge.r };
+    });
+  }
+
+  function selectNode(id) {
+    selectedId = id;
+    focused = false;
+    const node = nodeById.get(id);
+    detailType.textContent = typeNames[node.type];
+    detailTitle.textContent = node.label;
+    detailSummary.textContent = node.summary;
+    const linked = directConnections(id);
+    connections.innerHTML = linked.slice(0, 5).map(item => `
+      <div class="ant-app-connection">
+        <div class="ant-app-connection-name">${item.node.label}</div>
+        <div class="ant-app-connection-relation">${item.relation} · ${typeNames[item.node.type]}</div>
+      </div>`).join('');
+    detailDomains.innerHTML = node.domains.map(domain => `<span class="ant-app-domain-tag">${domainNames[domain]}</span>`).join('');
+    focusButton.textContent = 'Focus on this node';
+    updateGraph();
+  }
+
+  function updateGraph() {
+    const activeTypes = new Set([...root.querySelectorAll('[data-entity-filter]:checked')].map(input => input.dataset.entityFilter));
+    const query = search.value.trim().toLowerCase();
+    const matching = new Set(nodeData.filter(node => !query || node.label.toLowerCase().includes(query)).map(node => node.id));
+    const querySet = new Set(matching);
+
+    if (query) {
+      edgeData.forEach(edge => {
+        if (matching.has(edge.a)) querySet.add(edge.b);
+        if (matching.has(edge.b)) querySet.add(edge.a);
+      });
+    }
+
+    const focusSet = new Set([selectedId]);
+    if (focused) {
+      edgeData.forEach(edge => {
+        if (edge.a === selectedId) focusSet.add(edge.b);
+        if (edge.b === selectedId) focusSet.add(edge.a);
+      });
+    }
+
+    const visible = new Set();
+    root.querySelectorAll('.ant-app-node').forEach(button => {
+      const node = nodeById.get(button.dataset.id);
+      const typeMatch = activeTypes.has(node.type);
+      const domainMatch = selectedDomain === 'all' || node.domains.includes(selectedDomain);
+      const queryMatch = !query || querySet.has(node.id);
+      const focusMatch = !focused || focusSet.has(node.id);
+      const show = typeMatch && domainMatch && queryMatch;
+      button.classList.toggle('is-hidden', !show);
+      button.classList.toggle('is-selected', node.id === selectedId);
+      button.classList.toggle('is-dimmed', show && !focusMatch);
+      if (show) visible.add(node.id);
+    });
+
+    let visibleEdges = 0;
+    root.querySelectorAll('.ant-app-edge').forEach((line, index) => {
+      const edge = edgeData[index];
+      const show = visible.has(edge.a) && visible.has(edge.b);
+      const related = edge.a === selectedId || edge.b === selectedId;
+      line.classList.toggle('is-hidden', !show);
+      line.classList.toggle('is-related', related);
+      line.classList.toggle('is-dimmed', show && focused && !related);
+      if (show) visibleEdges += 1;
+    });
+
+    root.querySelectorAll('.ant-app-edge-label').forEach((label, index) => {
+      const edge = edgeData[index];
+      const show = visible.has(edge.a) && visible.has(edge.b);
+      const related = edge.a === selectedId || edge.b === selectedId;
+      label.classList.toggle('is-hidden', !show || !related || !showRelationshipNames.checked);
+    });
+
+    empty.style.display = visible.size ? 'none' : 'grid';
+    workMeta.textContent = `${visible.size} nodes · ${visibleEdges} relationships`;
+  }
+
+  function setView(viewName) {
+    const config = viewConfigs[viewName];
+    if (!config) return;
+
+    navButtons.forEach(button => {
+      if (button.dataset.view === viewName) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    });
+
+    root.querySelectorAll('[data-entity-filter]').forEach(input => {
+      input.checked = config.types.includes(input.dataset.entityFilter);
+    });
+
+    selectedDomain = 'all';
+    domainSelect.value = 'all';
+    search.value = '';
+    focused = false;
+    workTitle.textContent = config.title;
+    selectNode(config.selected);
+    fitGraph();
+  }
+
+  root.querySelectorAll('[data-entity-filter]').forEach(input => input.addEventListener('change', updateGraph));
+  navButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+  showRelationshipNames.addEventListener('change', updateGraph);
+  domainSelect.addEventListener('change', () => {
+    selectedDomain = domainSelect.value;
+    focused = false;
+    workTitle.textContent = selectedDomain === 'all' ? 'University talent network' : `${domainNames[selectedDomain]} network`;
+    updateGraph();
+    if (selectedDomain === 'all') fitGraph();
+    else centerDomain(selectedDomain);
+  });
+
+  search.addEventListener('input', () => { focused = false; updateGraph(); });
+
+  zoomOutButton.addEventListener('click', () => zoomFromCenter(0.92));
+  zoomInButton.addEventListener('click', () => zoomFromCenter(1.08));
+  zoomFitButton.addEventListener('click', fitGraph);
+
+  graphStage.addEventListener('wheel', event => {
+    event.preventDefault();
+    const bounds = graphStage.getBoundingClientRect();
+    const centerX = event.clientX - bounds.left;
+    const centerY = event.clientY - bounds.top;
+    zoomGraph(graphScale * (event.deltaY < 0 ? 1.04 : 0.96), centerX, centerY);
+  }, { passive: false });
+
+  graphStage.addEventListener('pointerdown', event => {
+    if (event.target.closest('.ant-app-node, .ant-app-zoom-controls')) return;
+    panPointerId = event.pointerId;
+    panStartX = event.clientX;
+    panStartY = event.clientY;
+    panOriginX = graphOffsetX;
+    panOriginY = graphOffsetY;
+    graphStage.classList.add('is-panning');
+    graphStage.setPointerCapture(event.pointerId);
+  });
+
+  graphStage.addEventListener('pointermove', event => {
+    if (event.pointerId !== panPointerId) return;
+    graphOffsetX = panOriginX + event.clientX - panStartX;
+    graphOffsetY = panOriginY + event.clientY - panStartY;
+    applyGraphTransform();
+  });
+
+  function stopPanning(event) {
+    if (event.pointerId !== panPointerId) return;
+    panPointerId = null;
+    graphStage.classList.remove('is-panning');
+  }
+
+  graphStage.addEventListener('pointerup', stopPanning);
+  graphStage.addEventListener('pointercancel', stopPanning);
+
+  focusButton.addEventListener('click', () => {
+    focused = !focused;
+    focusButton.textContent = focused ? 'Show surrounding network' : 'Focus on this node';
+    updateGraph();
+  });
+
+  buildGraph();
+  selectNode('narin');
+  centerNode('narin');
+
+  const graphResizeObserver = new ResizeObserver(() => {
+    linesLayer.setAttribute('viewBox', `0 0 ${Math.max(graphWorld.clientWidth, 1)} ${Math.max(graphWorld.clientHeight, 1)}`);
+    linesLayer.setAttribute('preserveAspectRatio', 'none');
+  });
+  graphResizeObserver.observe(graphStage);
+  graphResizeObserver.observe(graphWorld);
+})();
+</script>
