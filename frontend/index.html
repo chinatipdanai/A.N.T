@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A.N.T. | Explore academic connections</title>
+    <link rel="stylesheet" href="styles.css?v=7" />
+    <script src="app.js?v=7" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span><strong class="brand-mark">A.N.T.</strong><small>Academic Network and Talent Map</small></span>
+      </div>
+      <span class="demo-badge"><span aria-hidden="true"></span> Local prototype</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-content">
+        <p class="hero-eyebrow">RESEARCH DISCOVERY · KMUTT</p>
+        <h1 id="page-title">Find the people behind<br /><em>the research.</em></h1>
+        <p>Explore publications, authors, and topics together. Follow each connection back to its source.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="art-line line-one"></span><span class="art-line line-two"></span><span class="art-line line-three"></span>
+        <span class="art-node node-one"></span><span class="art-node node-two"></span><span class="art-node node-three"></span><span class="art-node node-four"></span>
+      </div>
+    </section>
+
+    <main class="layout">
+      <section class="search-panel panel" aria-labelledby="search-title">
+        <div class="panel-heading search-heading">
+          <div>
+            <p class="eyebrow">01 / DISCOVER</p>
+            <h2 id="search-title">Search the network</h2>
+          </div>
+        </div>
+        <p class="intro">Start with a topic, paper, or researcher.</p>
+        <label for="search-input">What are you looking for?</label>
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
+          <input id="search-input" type="search" placeholder="Search research records" autocomplete="off" />
+        </div>
+        <label for="search-type" class="filter-label">Search within</label>
+        <select id="search-type">
+          <option value="">All records</option>
+          <option value="publication">Publications</option>
+          <option value="author">Authors</option>
+          <option value="topic">Topics</option>
+        </select>
+        <div class="quick-search" aria-label="Suggested searches">
+          <span>Try a search</span>
+          <button type="button" data-query="nanofluid">Nanofluid</button>
+          <button type="button" data-query="solar energy">Solar energy</button>
+        </div>
+        <div class="results-heading"><span>Results</span><p id="result-count" class="result-count" role="status"></p></div>
+        <ul id="results" class="results" aria-label="Search results"></ul>
+      </section>
+
+      <section class="network-panel panel" aria-labelledby="network-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / EXPLORE</p>
+            <h2 id="network-title">Connection map</h2>
+          </div>
+          <div class="view-switch" role="group" aria-label="Connection view">
+            <button id="flow-view" type="button" class="is-active" aria-pressed="true">Flow view</button>
+            <button id="network-view" type="button" aria-pressed="false">Network graph</button>
+          </div>
+        </div>
+        <div id="graph" class="graph" aria-live="polite"></div>
+        <div class="graph-legend"><span><i class="topic-key"></i> Topic</span><span><i class="publication-key"></i> Publication</span><span><i class="author-key"></i> Author record</span></div>
+      </section>
+
+      <aside class="details-panel panel" aria-labelledby="details-title">
+        <p class="eyebrow">03 / VERIFY</p>
+        <h2 id="details-title">Source details</h2>
+        <p class="details-intro">See what supports the selected connection.</p>
+        <div id="details" aria-live="polite"></div>
+      </aside>
+    </main>
+
+    <footer class="site-footer"><strong>A.N.T.</strong> · Source-backed research discovery · Local prototype</footer>
+  </body>
+</html>
