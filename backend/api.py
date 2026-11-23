@@ -6,8 +6,12 @@ from urllib.parse import urlparse, parse_qs, unquote
 from pathlib import Path
 try:
     from .config import load_env, project_path
+    from .collaboration import collaboration
+    from .records import list_records
 except ImportError:
     from config import load_env, project_path
+    from collaboration import collaboration
+    from records import list_records
 
 load_env()
 DB_PATH=project_path("ANT_DB","backend/ant.db")
@@ -56,6 +60,8 @@ class Handler(BaseHTTPRequestHandler):
                         if x.get("details_json"): x["details_json"]=json.loads(x["details_json"])
                     return self.send_json(200,{"data":rows})
                 if path=="/api/v1/search": return self.search(db,q)
+                if path=="/api/v1/collaborations": return self.send_json(200,collaboration(db,q))
+                if path=="/api/v1/records": return self.send_json(200,list_records(db,q))
                 parts=path.split("/")
                 if len(parts)==4 and parts[:3]==["","api","v1"] and parts[3]=="graph": return self.graph(db,q)
                 if len(parts)==7 and parts[:4]==["","api","v1","raw"]:
@@ -64,6 +70,8 @@ class Handler(BaseHTTPRequestHandler):
                     result=dict(row); result["raw_json"]=json.loads(result["raw_json"]); return self.send_json(200,{"data":result})
                 if len(parts)==5 and parts[:3]==["","api","v1"] and parts[3] in ("authors","publications","topics"): return self.detail(db,parts[3],parts[4],q)
                 return self.send_json(404,{"error":{"code":"NOT_FOUND","message":"Endpoint not found"}})
+        except LookupError as e:
+            return self.send_json(404,{"error":{"code":"NOT_FOUND","message":str(e)}})
         except ValueError as e:
             return self.send_json(400,{"error":{"code":"INVALID_QUERY","message":str(e)}})
         except sqlite3.OperationalError:

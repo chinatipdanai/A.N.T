@@ -75,13 +75,23 @@ See `FE_HANDOFF.md` for Windows CMD commands, response types, and a React/Vite i
 | `GET /api/v1/stats` | Count normalized records and source records |
 | `GET /api/v1/imports` | Review import runs and rejected-row summaries |
 | `GET /api/v1/search?q=nanofluid&type=topic&page=1&limit=20` | Search `author`, `publication`, `topic`, or all |
+| `GET /api/v1/records?type=author&page=1&limit=20` | Independent full author directory; `type=publication` for works, optional `q` searches within the directory |
 | `GET /api/v1/authors/{id}?page=1&limit=20` | Author and paginated linked publications |
 | `GET /api/v1/publications/{id}` | Publication, authors, topics, source metrics |
 | `GET /api/v1/topics/{id}?page=1&limit=20` | Topic and paginated linked publications |
 | `GET /api/v1/graph?topic_id={id}&limit=25` | Evidence-backed topic → publication → author graph |
+| `GET /api/v1/collaborations?country=JP&institution={id}&view=authors&page=1&limit=24` | KMUTT → countries → institutions → shared publications / authors with verified affiliation; omit country/institution to move up |
 | `GET /api/v1/raw/{source}/{record_type}/{source_record_id}` | Original complete source row |
 
 Graph endpoint defaults to confirmed topic edges only and caps returned publications at 100. IDs containing special URL characters must be percent-encoded.
+
+The collaboration endpoint groups distinct shared publications from `publication_institutions`, requiring KMUTT (`I60837268`) and each partner to occur in the same source record. It excludes KMUTT itself, uses institution `raw_json.country_code` (`ZZ` for missing values), and counts multi-country papers once in the overall summary. `view=publications` is the default; `view=authors` requires author-level affiliation evidence in the original full Works JSON, not a generic coauthor link. `all=1` returns the entire current scope and ignores pagination; this is what the graph uses. Paginated API requests remain supported for other consumers. It accepts `year_from`, `year_to`, `page`, and `limit` (1–100). An active year filter excludes works with missing years. No source data or schema is modified. Test with `py -m unittest backend.test_collaboration backend.test_records -v`.
+
+The records endpoint accepts `type=author|publication`, optional `q`, `page` (>=1), and `limit` (1–100, default 20). Empty queries list all records without any graph filter. Metadata includes total rows and total pages. Results have deterministic ordering, with publications sorted by newest year first.
+
+Country collaboration scopes also support `group_by=type` to return `level=institution_types` groups, and `institution_type=education|company|government|nonprofit|facility|healthcare|archive|funder|other|unknown` to filter institutions and all deeper scopes. Both options require `country`. Group counts use distinct publications and institutions, keeping shared works from being counted twice inside a group. Types come from institution `raw_json.type`; missing or unrecognized values use `unknown`. `facility` is retained without inferring lab membership. Use `all=1` to load every group or member without graph pagination.
+
+`overview=continents&all=1` returns the homepage's continent groups plus a separate Thailand country node. `continent=AF|AS|EU|NA|SA|OC|AN|UNKNOWN` filters every deeper scope; Asia excludes Thailand. Continent items include `country_count`, `institution_count` and distinct `publication_count`. `overview=countries` (the API compatibility default) retains a flat country list. The frontend requests continents by default. Mapping policy and source are documented in `geography.py`; it is entirely offline and preserves original source codes. Unknown mappings remain visible rather than being inferred.
 
 ## Data handling
 

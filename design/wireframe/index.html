@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A.N.T. — Interactive wireframe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main aria-label="เครือข่ายวิชาการ A.N.T.">
+    <svg id="graph" role="group" aria-label="กราฟเครือข่าย ลาก node เพื่อย้าย ลากพื้นหลังเพื่อเลื่อน และเลื่อนล้อเมาส์เพื่อซูม"><g id="viewport"><g id="edges"></g><g id="edge-labels"></g><g id="nodes"></g></g></svg>
+    <section id="directory" hidden aria-labelledby="directory-title">
+      <div class="directory-heading"><div><p class="eyebrow">A.N.T. / รายการข้อมูลตัวอย่าง</p><h1 id="directory-title" tabindex="-1"></h1><p id="directory-description"></p></div><button id="back-graph">กลับไปยังกราฟ</button></div>
+      <div class="directory-tools"><input id="list-search" type="search" aria-label="ค้นหาในรายการ" placeholder="ค้นหาในรายการ…"><output id="list-count" aria-live="polite"></output></div>
+      <div id="list-results"></div><p id="list-empty" hidden>ไม่พบรายการที่ตรงกับคำค้นหา</p>
+    </section>
+  </main>
+  <header id="navigation">
+    <button id="reveal" aria-label="เปิดเมนูด้านบน" aria-expanded="false"></button>
+    <div class="nav-content" inert>
+      <div class="nav-row"><strong class="brand">A.N.T.</strong><span class="tag">WIREFRAME / ข้อมูลตัวอย่าง</span><button id="all" class="active">สำรวจเครือข่าย</button><button data-page="people">บุคคล</button><button data-page="academic">ผลงานวิชาการ</button><button data-page="roles">อาชีพ</button><button id="help">วิธีใช้งาน</button></div>
+      <div class="nav-row controls"><input id="search" type="search" aria-label="ค้นหา node" placeholder="ค้นหาชื่อ คน ทักษะ หรือผลงาน…"><label>ประเภท <select id="kind"><option value="all">ทั้งหมด</option><option value="person">บุคคล</option><option value="skill">ทักษะ</option><option value="publication">สิ่งพิมพ์</option><option value="project">โครงการ</option><option value="course">รายวิชา</option><option value="role">อาชีพ</option></select></label><button id="fit">จัดกราฟเข้าจอ</button><button id="pause" aria-pressed="false">หยุดการเคลื่อนไหว</button><output id="count"></output></div>
+    </div>
+  </header>
+  <div id="tooltip" role="tooltip" hidden></div>
+  <aside id="panel" aria-label="รายละเอียด node" aria-hidden="true" inert>
+    <div class="panel-top"><span>NODE DETAILS</span><button id="close-panel" aria-label="ปิดรายละเอียด">ปิด ×</button></div>
+    <div id="details"></div>
+  </aside>
+  <div id="empty" hidden>ไม่พบ node ที่ตรงกับเงื่อนไข <button id="reset">ล้างตัวกรอง</button></div>
+  <dialog id="instructions"><h2>Wireframe A.N.T.</h2><p>ตัวอย่างโครงร่างขาวดำสำหรับทดลองการใช้งาน ไม่ใช่ข้อมูลจริง</p><ul><li>วางเมาส์ขอบบนเพื่อเปิดเมนู</li><li>วางเมาส์บน node เพื่อดูข้อมูลสั้น ๆ</li><li>คลิก node เพื่อเปิดรายละเอียดด้านขวา</li><li>ลาก node เพื่อย้ายตำแหน่ง ลากพื้นหลังเพื่อเลื่อนกราฟ</li><li>เลื่อนล้อเมาส์เพื่อซูม</li><li>กด Tab เพื่อเลือก node และ Enter เพื่อเปิดรายละเอียด</li><li>กด Escape เพื่อปิดรายละเอียดหรือเมนู</li></ul><form method="dialog"><button>เข้าใจแล้ว</button></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>

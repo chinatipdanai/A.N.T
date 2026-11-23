@@ -1,86 +1,38 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A.N.T. | Explore academic connections</title>
-    <link rel="stylesheet" href="styles.css?v=7" />
-    <script src="app.js?v=7" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="brand">
-        <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <span><strong class="brand-mark">A.N.T.</strong><small>Academic Network and Talent Map</small></span>
-      </div>
-      <span class="demo-badge"><span aria-hidden="true"></span> Local prototype</span>
-    </header>
-
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-content">
-        <p class="hero-eyebrow">RESEARCH DISCOVERY · KMUTT</p>
-        <h1 id="page-title">Find the people behind<br /><em>the research.</em></h1>
-        <p>Explore publications, authors, and topics together. Follow each connection back to its source.</p>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <span class="art-line line-one"></span><span class="art-line line-two"></span><span class="art-line line-three"></span>
-        <span class="art-node node-one"></span><span class="art-node node-two"></span><span class="art-node node-three"></span><span class="art-node node-four"></span>
-      </div>
-    </section>
-
-    <main class="layout">
-      <section class="search-panel panel" aria-labelledby="search-title">
-        <div class="panel-heading search-heading">
-          <div>
-            <p class="eyebrow">01 / DISCOVER</p>
-            <h2 id="search-title">Search the network</h2>
-          </div>
-        </div>
-        <p class="intro">Start with a topic, paper, or researcher.</p>
-        <label for="search-input">What are you looking for?</label>
-        <div class="search-field">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
-          <input id="search-input" type="search" placeholder="Search research records" autocomplete="off" />
-        </div>
-        <label for="search-type" class="filter-label">Search within</label>
-        <select id="search-type">
-          <option value="">All records</option>
-          <option value="publication">Publications</option>
-          <option value="author">Authors</option>
-          <option value="topic">Topics</option>
-        </select>
-        <div class="quick-search" aria-label="Suggested searches">
-          <span>Try a search</span>
-          <button type="button" data-query="nanofluid">Nanofluid</button>
-          <button type="button" data-query="solar energy">Solar energy</button>
-        </div>
-        <div class="results-heading"><span>Results</span><p id="result-count" class="result-count" role="status"></p></div>
-        <ul id="results" class="results" aria-label="Search results"></ul>
-      </section>
-
-      <section class="network-panel panel" aria-labelledby="network-title">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">02 / EXPLORE</p>
-            <h2 id="network-title">Connection map</h2>
-          </div>
-          <div class="view-switch" role="group" aria-label="Connection view">
-            <button id="flow-view" type="button" class="is-active" aria-pressed="true">Flow view</button>
-            <button id="network-view" type="button" aria-pressed="false">Network graph</button>
-          </div>
-        </div>
-        <div id="graph" class="graph" aria-live="polite"></div>
-        <div class="graph-legend"><span><i class="topic-key"></i> Topic</span><span><i class="publication-key"></i> Publication</span><span><i class="author-key"></i> Author record</span></div>
-      </section>
-
-      <aside class="details-panel panel" aria-labelledby="details-title">
-        <p class="eyebrow">03 / VERIFY</p>
-        <h2 id="details-title">Source details</h2>
-        <p class="details-intro">See what supports the selected connection.</p>
-        <div id="details" aria-live="polite"></div>
-      </aside>
-    </main>
-
-    <footer class="site-footer"><strong>A.N.T.</strong> · Source-backed research discovery · Local prototype</footer>
-  </body>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A.N.T. — Academic Network &amp; Talent Map</title>
+  <link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body>
+  <main aria-label="เครือข่ายวิชาการ A.N.T.">
+    <svg id="graph" role="group" aria-label="กราฟเครือข่าย ลาก node เพื่อย้าย ลากพื้นหลังเพื่อเลื่อน และเลื่อนล้อเมาส์เพื่อซูม"><g id="viewport"><g id="edges"></g><g id="label-leaders" aria-hidden="true"></g><g id="nodes"></g><g id="node-labels" aria-hidden="true"></g></g></svg>
+  </main>
+  <header id="navigation">
+    <button id="reveal" aria-label="เปิดเมนูด้านบน" aria-expanded="false"><span> A.N.T. · เมนู ↓ </span></button>
+    <div class="nav-content" inert>
+      <div class="nav-row"><strong class="brand">A.N.T.</strong><span class="tag">Academic Network &amp; Talent Map · KMUTT</span><a href="index.html" class="active" aria-current="page">สำรวจเครือข่าย</a><a href="people.html">บุคคล</a><a href="academic.html">ผลงานวิชาการ</a><a href="roles.html">อาชีพ</a><button id="help">วิธีใช้งาน</button></div>
+      <div class="nav-row controls"><input id="search" type="search" maxlength="200" aria-label="ค้นหาในฐานข้อมูล" placeholder="ค้นหาชื่อ บุคคล หัวข้อ หรือสิ่งพิมพ์…"><label>ประเภท <select id="kind"><option value="all">ทั้งหมด</option><option value="author">บุคคล</option><option value="topic">หัวข้อวิจัย</option><option value="publication">สิ่งพิมพ์</option></select></label><button id="fit">จัดกราฟเข้าจอ</button><button id="pause" aria-pressed="false">หยุดการเคลื่อนไหว</button><output id="count" aria-live="polite"></output></div>
+      <section id="search-results" aria-label="ผลการค้นหา" hidden><p id="search-status" role="status"></p><div id="search-items"></div><button id="search-more" hidden>โหลดเพิ่มเติม</button></section>
+    </div>
+  </header>
+  <section id="explorer-bar" aria-label="ระดับการสำรวจ">
+    <nav id="breadcrumbs" aria-label="เส้นทางการสำรวจ"></nav>
+    <p id="scope-summary" role="status"></p>
+    <div id="overview-mode" hidden role="group" aria-label="การจัดกลุ่มภาพรวม"><button data-overview="continents">ตามทวีป</button><button data-overview="countries">ตามประเทศ</button></div>
+    <div id="country-grouping" hidden role="group" aria-label="การจัดกลุ่มในประเทศ"><button data-country-grouping="none">แสดงทั้งหมด</button><button data-country-grouping="type">แยกตามประเภทองค์กร</button></div>
+    <div id="institution-views" hidden role="group" aria-label="ข้อมูลของสถาบัน"><button data-institution-view="publications">สิ่งพิมพ์ร่วม</button><button data-institution-view="authors">บุคคลที่ยืนยันสังกัด</button></div>
+  </section>
+  <div id="tooltip" role="tooltip" hidden></div>
+  <aside id="panel" aria-label="รายละเอียด node" aria-hidden="true" inert>
+    <div class="panel-top"><span>NODE DETAILS</span><button id="close-panel" aria-label="ปิดรายละเอียด">ปิด ×</button></div>
+    <div id="details"></div>
+  </aside>
+  <div id="empty" hidden><p id="graph-status" role="status"></p><button id="reset">ลองใหม่</button></div>
+  <p id="network-caption" role="status"></p>
+  <dialog id="instructions"><h2>สำรวจเครือข่าย A.N.T.</h2><p>สำรวจบุคคล สิ่งพิมพ์ และหัวข้อวิจัยจากข้อมูลที่นำเข้า</p><ul><li>วางเมาส์ขอบบน หรือกดปุ่มเมนู เพื่อค้นหาและกรองข้อมูล</li><li>วางเมาส์บน node เพื่อดูข้อมูลสั้น ๆ</li><li>คลิก node เพื่อเปิดรายละเอียดและหลักฐานด้านขวา</li><li>ลาก node เพื่อย้ายตำแหน่ง ลากพื้นหลังเพื่อเลื่อนกราฟ</li><li>เลื่อนล้อเมาส์เพื่อซูม</li><li>กด Tab เพื่อเลือก node และ Enter เพื่อเปิดรายละเอียด</li><li>กด Escape เพื่อปิดรายละเอียดหรือเมนู</li></ul><form method="dialog"><button>เข้าใจแล้ว</button></form></dialog>
+  <script src="collaboration.js?v=16"></script>
+  <script src="app.js?v=16"></script>
+</body>
 </html>
